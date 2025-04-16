@@ -12,6 +12,11 @@ export default function AddProductPage() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [dimensions, setDimensions] = useState('');
+  const [length, setLength] = useState('');
+  const [width, setWidth] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [isBulky, setIsBulky] = useState(false);
 
   // For file upload handling:
   const [imageFiles, setImageFiles] = useState([]);
@@ -70,8 +75,14 @@ export default function AddProductPage() {
       title,
       description,
       price: parseFloat(price),
-      dimensions,
-      images: imageURLs, // Use the uploaded image URLs
+      dimensions: {
+        length: parseFloat(length),
+        width: parseFloat(width),
+        height: parseFloat(height),
+        weight: parseFloat(weight),
+      },
+      images: imageURLs,
+      isBulky,
     };
 
     const res = await fetch('/api/products', {
@@ -112,12 +123,57 @@ export default function AddProductPage() {
           onChange={(e) => setPrice(e.target.value)}
           required
         />
-        <Input
+        {/* <Input
           type='text'
           placeholder='Dimensions'
           value={dimensions}
           onChange={(e) => setDimensions(e.target.value)}
-        />
+        /> */}
+        <div className='grid grid-cols-2 gap-4'>
+          <Input
+            type='number'
+            step='0.1'
+            placeholder='Length (cm)'
+            value={length}
+            onChange={(e) => setLength(e.target.value)}
+            required
+          />
+          <Input
+            type='number'
+            step='0.1'
+            placeholder='Width (cm)'
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
+            required
+          />
+          <Input
+            type='number'
+            step='0.1'
+            placeholder='Height (cm)'
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            required
+          />
+          <Input
+            type='number'
+            step='0.1'
+            placeholder='Weight (kg)'
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className='flex items-center space-x-2'>
+          <input
+            type='checkbox'
+            id='isBulky'
+            checked={isBulky}
+            onChange={(e) => setIsBulky(e.target.checked)}
+          />
+          <label htmlFor='isBulky'>Is this a bulky product?</label>
+        </div>
+
         {/* File input for image uploads (name attribute must be "file") */}
         <div className='flex flex-col space-y-2'>
           <label className='font-semibold'>Upload Images</label>

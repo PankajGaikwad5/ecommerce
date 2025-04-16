@@ -44,7 +44,7 @@ export default function ProductsPage() {
               <h2 className='text-xl font-semibold mb-2'>{product.title}</h2>
               <p className='text-gray-700 mb-2'>{product.description}</p>
               <p className='font-bold text-lg mb-4'>
-                ${product.price.toFixed(2)}
+                ₹{product.price.toFixed(2)}
               </p>
               <Link href={`/products/${product._id}`}>
                 <Button className='mt-auto'>View Details</Button>

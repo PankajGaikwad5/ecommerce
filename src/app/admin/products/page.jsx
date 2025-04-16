@@ -45,12 +45,14 @@ export default function AdminProductsPage() {
     <div className='p-6'>
       <h1 className='text-2xl font-bold mb-4'>Admin Products</h1>
       {/* Button to navigate to Add Product Page */}
-      <Button
-        onClick={() => router.push('/admin/products/add')}
-        className='mb-4'
-      >
-        Add Product
-      </Button>
+      <a href='/admin/products/add' className='cursor-pointer'>
+        <Button
+          // onClick={() => router.push('/admin/products/add')}
+          className='mb-4 cursor-pointer'
+        >
+          Add Product
+        </Button>
+      </a>
       {products.length === 0 ? (
         <p>No products found.</p>
       ) : (
@@ -68,7 +70,7 @@ export default function AdminProductsPage() {
               <tr key={product._id}>
                 <td className='py-2 px-4 border'>{product.title}</td>
                 <td className='py-2 px-4 border'>{product.description}</td>
-                <td className='py-2 px-4 border'>${product.price}</td>
+                <td className='py-2 px-4 border'>₹ {product.price}</td>
                 <td className='py-2 px-4 border space-x-2'>
                   <Button
                     variant='outline'

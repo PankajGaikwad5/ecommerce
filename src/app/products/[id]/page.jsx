@@ -46,10 +46,11 @@ export default function ProductDetailPage() {
       </Button>
       <h1 className='text-3xl font-bold mb-4'>{product.title}</h1>
       <p className='text-gray-700 mb-4'>{product.description}</p>
-      <p className='text-xl font-semibold mb-4'>${product.price.toFixed(2)}</p>
-      {product.dimensions && (
-        <p className='mb-4'>Dimensions: {product.dimensions}</p>
-      )}
+      <p className='text-xl font-semibold mb-4'>₹{product.price.toFixed(2)}</p>
+      {/* {product.dimensions && (
+        // <p className='mb-4'>Dimensions: {product.dimensions}</p>
+        <img src={product.dimensions} />
+      )} */}
       {product.images && product.images.length > 0 && (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
           {product.images.map((url, index) => (
@@ -89,6 +90,9 @@ export default function ProductDetailPage() {
                 id: product._id,
                 title: product.title,
                 price: product.price,
+                isBulky: product.isBulky, // add the bulky flag here!
+                // Optionally, add dimensions if you need them later:
+                dimensions: product.dimensions,
               })
             }
           >
